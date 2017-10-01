@@ -7,13 +7,13 @@
 	omp_set_num_threads();
 	double omp_get_wtime();
 	#pragma omp barrier - wait for all
-	#pragma omp barrier - one at a time
+	#pragma omp critical - one at a time
 */
 
 using namespace std;
 #define N 600
 
-void parallel_mult(int A[N][N], int B[N][N], int res[N][N])
+void parallelMult(int A[N][N], int B[N][N], int res[N][N])
 {
 	#pragma omp parallel
 	{
@@ -42,7 +42,7 @@ void parallel_mult(int A[N][N], int B[N][N], int res[N][N])
 	}
 }
 
-void non_parallel_mult(int A[N][N], int B[N][N], int res[N][N])
+void nonParallelMult(int A[N][N], int B[N][N], int res[N][N])
 {
 	//Initializing matrix A
 	for(int i=0; i<N; i++)
@@ -72,13 +72,13 @@ int main()
 
 	//Parallel version
 	w_timer = omp_get_wtime();
-	parallel_mult(A, B, res);
+	parallelMult(A, B, res);
 	w_timer = (double)omp_get_wtime() - w_timer;
 	cout<<"\nParallelising the multiplication algorithm : "<<w_timer<<"s";
 
 	//Non parallel version
 	w_timer = omp_get_wtime();
-	non_parallel_mult(A, B, res);
+	nonParallelMult(A, B, res);
 	w_timer = (double)omp_get_wtime() - w_timer;
 	cout<<"\nWithout parallelising                      : "<<w_timer<<"s\n\n";
 }
