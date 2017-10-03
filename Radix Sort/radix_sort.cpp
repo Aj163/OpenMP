@@ -18,11 +18,17 @@ void radixSortNonParallel(int arr[], int n);
 void countSortParallel(int arr[], int n, int expo);
 void radixSortParallel(int arr[], int n);
 
+int random_array[1000000];
+
 int main()
 {
 	double w_timer;
+	srand(time(0));
 	int n = 1000000;
 	int arr[n];
+
+	for(int i=0; i<n; i++)
+		random_array[i] = rand()%1000000000;
 
 	//Non parallel version
 	w_timer = omp_get_wtime();
@@ -86,9 +92,9 @@ void radixSortParallel(int arr[], int n)
 	// Radix Sort
 
 	//init
-	//#pragma omp parallel for
-	for(int i=0; i<1000000; i++)
-		arr[i] = 1000000-i;
+	#pragma omp parallel for
+	for(int i=0; i<n; i++)
+		arr[i] = random_array[i];
 
 	// Do counting sort for every digit. Note that instead
 	// of passing digit number, exp is passed. exp is 2^i
@@ -105,7 +111,7 @@ void countSortNonParallel(int arr[], int n, int expo)
 
 	int output[n]; // output array
 	int i, ctr_odd=0, ctr_even=0, count[2];
-	
+
 	// Store count of occurrences in count[]
 	for(i = 0; i < n; i++)
 	{
@@ -143,8 +149,8 @@ void radixSortNonParallel(int arr[], int n)
 	// Radix Sort
 
 	//init
-	for(int i=0; i<1000000; i++)
-		arr[i] = 1000000-i;
+	for(int i=0; i<n; i++)
+		arr[i] = random_array[i];
 
 	// Do counting sort for every digit. Note that instead
 	// of passing digit number, exp is passed. exp is 2^i
