@@ -100,7 +100,7 @@ void radixSortParallel(int arr[], int n)
 	// of passing digit number, exp is passed. exp is 2^i
 	// where i is current digit number in binary
 	// Total number of bits is 31
-	for(int expo = 0; expo<5; expo++)
+	for(int expo = 0; expo<32; expo++)
 		countSortParallel(arr, n, (1<<expo));
 }
 
@@ -156,6 +156,6 @@ void radixSortNonParallel(int arr[], int n)
 	// of passing digit number, exp is passed. exp is 2^i
 	// where i is current digit number in binary
 	// Total number of bits is 31
-	for(int expo = 0; expo<5; expo++)
+	for(int expo = 0; expo<32; expo++)
 		countSortNonParallel(arr, n, (1<<expo));
 }
