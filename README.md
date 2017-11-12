@@ -1,3 +1,10 @@
 # OpenMP
-- Multiprocessing with Openmp in C++
-- To run any of the codes ```$ g++ -fopenmp filename.cpp```
+##### Multiprocessing with OpenMP in C++
+
+To compile:
+
+```$ g++ -fopenmp -o output_filename filename.cpp```
+
+To run:
+
+```$ ./output_filename```
